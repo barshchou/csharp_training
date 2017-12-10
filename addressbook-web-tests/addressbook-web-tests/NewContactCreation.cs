@@ -46,21 +46,26 @@ namespace WebAddressbookTests
         public void NewContactCreationTest()
         {
             Login();
-            AddContact();
             ContactData contact = new ContactData("ivan", "ivanovich", "ivanov");
             contact.Nickname = "nickn";
             contact.Bday = "6";
             contact.Bmonth = "May";
             contact.Aday = "12";
             contact.Amonth = "June";
+            AddContact();
             FillContactData(contact);
-            // ERROR: Caught exception [Error: Dom locators are not implemented yet!]
+            Submit();
             Logout();
         }
 
         private void Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
+        private void Submit()
+        {
+            driver.FindElement(By.Name("submit")).Click();
         }
 
         private void FillContactData(ContactData contact)
