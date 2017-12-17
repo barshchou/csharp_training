@@ -15,6 +15,44 @@ namespace WebAddressbookTests
         {
         }
 
+        public ContactHelper Modify(ContactData newData, int c)
+        {
+            EditButton(c);
+            FillContactData(newData);
+            ModifyContact();
+            return this;
+        }
+
+        public ContactHelper Remove(int c)
+        {
+            SelectContact(c);
+            SubmitDelete();
+            return this;
+        }
+
+        private ContactHelper ModifyContact()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        private ContactHelper EditButton(int c)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])["+ c +"]")).Click();
+            return this;
+        }
+
+        public void SubmitDelete()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+        }
+
+        public void SelectContact(int c)
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]']["+ c +"]")).Click();
+        }
+
         public ContactHelper AddContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
