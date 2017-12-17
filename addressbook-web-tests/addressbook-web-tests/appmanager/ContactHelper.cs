@@ -42,15 +42,17 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public void SubmitDelete()
+        public ContactHelper SubmitDelete()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            return this;
         }
 
-        public void SelectContact(int c)
+        public ContactHelper SelectContact(int c)
         {
             driver.FindElement(By.XPath("//input[@name='selected[]']["+ c +"]")).Click();
+            return this;
         }
 
         public ContactHelper AddContact()
