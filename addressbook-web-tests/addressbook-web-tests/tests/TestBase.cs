@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 
 namespace WebAddressbookTests
@@ -11,12 +14,14 @@ namespace WebAddressbookTests
     public class TestBase
     {
         protected ApplicationManager app;
-        
 
         [SetUp]
             public void SetupTest()
             {
+                StringBuilder verificationErrors = new StringBuilder();
                 app = new ApplicationManager();
+                app.Navigator.OpenHomePage();
+                app.Auth.Login(new AccountData("admin", "secret"));
             }
 
             [TearDown]
@@ -26,3 +31,4 @@ namespace WebAddressbookTests
             }
     }
 }
+

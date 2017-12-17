@@ -11,13 +11,14 @@ namespace WebAddressbookTests
 {
     public class LogoutHelper : HelperBase
     {
-        public LogoutHelper(IWebDriver driver) : base(driver)
+        public LogoutHelper(ApplicationManager manager) : base(manager)
         {
         }
 
-        public void Logout()
+        public LogoutHelper Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+            return this;
         }
     }
 }
