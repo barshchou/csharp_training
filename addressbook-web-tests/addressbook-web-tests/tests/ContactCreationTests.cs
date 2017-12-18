@@ -20,9 +20,8 @@ namespace WebAddressbookTests
             contact.Aday = "12";
             contact.Amonth = "June";
 
-            app.Contacts.AddContact()
-                .FillContactData(contact)
-                .Submit();
+            app.Contacts.Create(contact);
+
         }
     }
 }

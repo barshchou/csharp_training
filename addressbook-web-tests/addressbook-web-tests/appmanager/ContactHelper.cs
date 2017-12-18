@@ -15,6 +15,15 @@ namespace WebAddressbookTests
         {
         }
 
+        public ContactHelper Create(ContactData contact)
+        {
+            AddContact();
+            FillContactData(contact);
+            Submit();
+            return this;
+        }
+
+
         public ContactHelper Modify(ContactData newData, int c)
         {
             manager.Navigator.OpenHomePage();
