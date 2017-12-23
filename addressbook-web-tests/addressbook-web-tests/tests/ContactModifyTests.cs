@@ -8,11 +8,19 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModifyTests : TestBase
+    public class ContactModifyTests : AuthTestBase //Наследование от TestAuth потому что предварительный логин требуется
     {
         [Test]
         public void ContactModifyTest()
         {
+            // Data input
+            ContactData contact = new ContactData("aaa", "aaa", "aaa");
+            contact.Nickname = "aaaa";
+            contact.Bday = "1";
+            contact.Bmonth = "May";
+            contact.Aday = "2";
+            contact.Amonth = "September";
+
             ContactData newData = new ContactData("bbbb", "tttttttt", "sssssssssss");
             newData.Nickname = "ppppppp";
             newData.Bday = "12";
@@ -20,7 +28,10 @@ namespace WebAddressbookTests
             newData.Aday = "24";
             newData.Amonth = "August";
 
-            app.Contacts.Modify(newData, 1);
+            //Action 
+            //Execute method using Contacts helper
+            app.Contacts.CheckElementBeforeModify(newData, contact, 1);
+
         }
     }
 }

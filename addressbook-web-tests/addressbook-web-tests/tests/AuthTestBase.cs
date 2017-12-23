@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    public class LogoutHelper : HelperBase
+    //Authorization class for tests that require login before running tests
+    public class AuthTestBase : TestBase
     {
-        public LogoutHelper(ApplicationManager manager) : base(manager)
-        {
-        }
+        [SetUp]
 
-        public LogoutHelper Logout()
+        public void SetupLogin()
         {
-            driver.FindElement(By.LinkText("Logout")).Click();
-            return this;
+            app.Auth.Login(new AccountData("admin", "secret"));
+         
         }
     }
 }

@@ -8,16 +8,25 @@ namespace WebAddressbookTests
 {
     [TestFixture]
 
-    public class GroupModifyTests : TestBase
+    public class GroupModifyTests : AuthTestBase //Наследование от TestAuth потому что предварительный логин требуется
     {
         [Test]
         public void GroupModifyTest()
         {
-            GroupData newData = new GroupData("test3");
-            newData.Header = "dsa";
-            newData.Footer = "ewq";
+            //Data input
+            GroupData group = new GroupData("test-new");
+            group.Header = null;
+            group.Footer = null;
+            
+            GroupData newData = new GroupData("test-new-modified");
+            newData.Header = null;
+            newData.Footer = null;
 
-            app.Groups.Modify(newData, 1);
+            //Action
+            //Execute method using Groups helper
+            app.Groups.CheckElementBeforeModify(newData, group, 1);
+
+            //app.Groups.Modify(newData, 1);
         }
     }
 }

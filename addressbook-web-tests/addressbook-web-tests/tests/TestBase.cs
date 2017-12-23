@@ -11,23 +11,19 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
+    //Base class for Tests
     public class TestBase
     {
         protected ApplicationManager app;
 
         [SetUp]
-            public void SetupTest()
+            public void SetupApplicationManager()
             {
-                StringBuilder verificationErrors = new StringBuilder();
-                app = new ApplicationManager();
-                app.Navigator.OpenHomePage();
-                app.Auth.Login(new AccountData("admin", "secret"));
-            }
+                //Creating new ApplicationManager instance for tests
+                app = ApplicationManager.GetInstance();
 
-            [TearDown]
-            public void TeardownTest()
-            {
-                app.Stop();
+                //Some Selenium class?
+                StringBuilder verificationErrors = new StringBuilder();
             }
     }
 }

@@ -9,7 +9,9 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
-{
+{   
+    //Base class helper for TestHelpers
+
     public class HelperBase
     {
         protected IWebDriver driver;
@@ -21,6 +23,18 @@ namespace WebAddressbookTests
         {
             this.manager = manager;
             driver = manager.Driver;
+        }
+
+        //Base method for locator searching and text input
+        //Executed only if text is not NULL
+        public void Type(By locator, string text)
+        {
+            if (text != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+            }
+
         }
 
         public void TeardownTest()
@@ -36,7 +50,8 @@ namespace WebAddressbookTests
             Assert.AreEqual("", verificationErrors.ToString());
         }
 
-        private bool IsElementPresent(By by)
+        //Checks for element present
+        public bool IsElementPresent(By by)
         {
             try
             {
@@ -49,6 +64,7 @@ namespace WebAddressbookTests
             }
         }
 
+        //Checks for Alert present
         private bool IsAlertPresent()
         {
             try
