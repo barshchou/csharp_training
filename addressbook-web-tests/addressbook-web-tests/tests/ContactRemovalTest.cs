@@ -12,8 +12,8 @@ namespace WebAddressbookTests
     public class ContactRemovalTests : AuthTestBase //Наследование от TestAuth потому что предварительный логин требуется
     {
         [Test]
-         public void ContactRemovalTest()
-         {
+        public void ContactRemovalTest()
+        {
             //Action 
             //Execute method using Contacts helper
             ContactData contact = new ContactData("bbb", "bbb", "bbb");
@@ -23,7 +23,16 @@ namespace WebAddressbookTests
             contact.Aday = "3";
             contact.Amonth = "December";
 
-            app.Contacts.CheckElementBeforeRemove(contact, 1);
+            if (app.Contacts.CheckElement())
+            {
+                app.Contacts.Remove(1);
+            }
+            else
+            {
+                app.Contacts.Create(contact);
+                app.Contacts.Remove(1);
+            }
+
          }
     }
 }

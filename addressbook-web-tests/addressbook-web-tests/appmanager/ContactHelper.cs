@@ -24,21 +24,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper CheckElementBeforeModify(ContactData newData, ContactData contact, int p)
-        {
-            manager.Navigator.OpenHomePage();
-            if (IsElementPresent(By.XPath("//input[@name='selected[]']")))
-            {
-                Modify(newData, p);
-            }
-            else
-            {
-                Create(contact);
-                Modify(newData, p);
-            }
-            return this;
-        }
-
         //Contact modification method
         public ContactHelper Modify(ContactData newData, int c)
         {
@@ -49,19 +34,18 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper CheckElementBeforeRemove(ContactData contact, int p)
+        public bool CheckElement()
         {
+            
             manager.Navigator.OpenHomePage();
             if (IsElementPresent(By.XPath("//input[@name='selected[]']")))
             {
-                Remove(p);
+                return true;
             }
             else
             {
-                Create(contact);
-                Remove(p);
+                return false;
             }
-            return this;
         }
 
         //Contact removal method

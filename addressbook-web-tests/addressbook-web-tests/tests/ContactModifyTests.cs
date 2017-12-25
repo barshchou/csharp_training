@@ -30,7 +30,16 @@ namespace WebAddressbookTests
 
             //Action 
             //Execute method using Contacts helper
-            app.Contacts.CheckElementBeforeModify(newData, contact, 1);
+            
+            if (app.Contacts.CheckElement())
+            {
+                app.Contacts.Modify(newData, 1);
+            }
+            else
+            {
+                app.Contacts.Create(contact);
+                app.Contacts.Modify(newData, 1);
+            }
 
         }
     }

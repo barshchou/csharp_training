@@ -27,19 +27,17 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper CheckElementBeforeRemove(GroupData group, int p)
+        public bool CheckElement()
         {
             manager.Navigator.GoToGroupPage();
             if (IsElementPresent(By.XPath("//input[@name='selected[]']")))
             {
-                Remove(p);
+                return true;
             }
             else
             {
-                Create(group);
-                Remove(p);
+                return false;
             }
-            return this;
         }
 
         public GroupHelper CheckElementBeforeModify(GroupData newData, GroupData group, int p)
