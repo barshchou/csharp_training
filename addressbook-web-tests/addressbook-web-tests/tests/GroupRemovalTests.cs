@@ -21,15 +21,13 @@ namespace WebAddressbookTests
             group.Header = "aaa";
             group.Footer = "bbb";
 
-            if (app.Groups.CheckElement())
-            {
-                app.Groups.Remove(1);
-            }
-            else
+            if (!app.Groups.CheckElement())
             {
                 app.Groups.Create(group);
-                app.Groups.Remove(1);
             }
+
+            app.Groups.Remove(1);
+            
         }
     }
 }

@@ -23,16 +23,12 @@ namespace WebAddressbookTests
             contact.Aday = "3";
             contact.Amonth = "December";
 
-            if (app.Contacts.CheckElement())
-            {
-                app.Contacts.Remove(1);
-            }
-            else
+            if (!app.Contacts.CheckElement())
             {
                 app.Contacts.Create(contact);
-                app.Contacts.Remove(1);
             }
 
+            app.Contacts.Remove(1);
          }
     }
 }

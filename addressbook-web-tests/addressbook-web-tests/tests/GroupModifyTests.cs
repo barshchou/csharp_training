@@ -24,15 +24,13 @@ namespace WebAddressbookTests
 
             //Action
             //Execute method using Groups helper
-            if (app.Groups.CheckElement())
-            {
-                app.Groups.Modify(newData, 1);
-            }
-            else
+            if (!app.Groups.CheckElement())
             {
                 app.Groups.Create(group);
-                app.Groups.Modify(newData, 1);
             }
+
+            app.Groups.Modify(newData, 1);
+            
 
         }
     }

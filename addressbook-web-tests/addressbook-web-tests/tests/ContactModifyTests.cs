@@ -31,16 +31,12 @@ namespace WebAddressbookTests
             //Action 
             //Execute method using Contacts helper
             
-            if (app.Contacts.CheckElement())
-            {
-                app.Contacts.Modify(newData, 1);
-            }
-            else
+            if (!app.Contacts.CheckElement())
             {
                 app.Contacts.Create(contact);
-                app.Contacts.Modify(newData, 1);
             }
 
+            app.Contacts.Modify(newData, 1);
         }
     }
 }

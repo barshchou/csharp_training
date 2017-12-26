@@ -36,16 +36,8 @@ namespace WebAddressbookTests
 
         public bool CheckElement()
         {
-            
             manager.Navigator.OpenHomePage();
-            if (IsElementPresent(By.XPath("//input[@name='selected[]']")))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (IsElementPresent(By.XPath("//input[@name='selected[]']")));
         }
 
         //Contact removal method

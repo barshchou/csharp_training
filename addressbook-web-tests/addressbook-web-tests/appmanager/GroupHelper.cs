@@ -29,31 +29,8 @@ namespace WebAddressbookTests
 
         public bool CheckElement()
         {
-            manager.Navigator.GoToGroupPage();
-            if (IsElementPresent(By.XPath("//input[@name='selected[]']")))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public GroupHelper CheckElementBeforeModify(GroupData newData, GroupData group, int p)
-        {
-            manager.Navigator.GoToGroupPage();
-            if (IsElementPresent(By.XPath("//input[@name='selected[]']")))
-            {
-                Modify(newData, p);
-            }
-            else
-            {
-                Create(group);
-                Modify(newData, p);
-            }
-
-            return this;
+            manager.Navigator.OpenHomePage();
+            return (IsElementPresent(By.XPath("//input[@name='selected[]']")));
         }
 
         //Remove group method
