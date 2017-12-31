@@ -48,7 +48,7 @@ namespace WebAddressbookTests
             //Execute method using Groups helper
             app.Groups.Create(group);
 
-            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount() + 1);
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(group);
