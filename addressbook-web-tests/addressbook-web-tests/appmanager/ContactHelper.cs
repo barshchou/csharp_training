@@ -34,6 +34,36 @@ namespace WebAddressbookTests
             return this;
         }
 
+        private List<ContactData> contactCache = null;
+
+        public List<ContactData> GetContactList()
+        {
+            if (contactCache == null)
+            {
+                contactCache = new List<ContactData>();
+                manager.Navigator.OpenHomePage();
+
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+
+                foreach (IWebElement element in elements)
+                {
+                    string[] s = element.Text.Split(' ');
+                    string firstname = s[0];
+                    string lastname = s[1];
+
+                    ContactData contact = new ContactData(lastname, firstname) { Id = element.FindElement(By.TagName("input")).GetAttribute("value") };
+                    contactCache.Add(contact);
+                }
+            }
+            return new List<ContactData>(contactCache);
+        }
+
+        public int GetContactCount()
+        {
+            manager.Navigator.OpenHomePage();
+            return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
+        }
+
         public bool CheckElement()
         {
             manager.Navigator.OpenHomePage();
@@ -53,13 +83,14 @@ namespace WebAddressbookTests
         private ContactHelper ModifyContact()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
         //Find button "Edit" method
         private ContactHelper EditButton(int c)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])["+ c +"]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])["+ (c + 1) +"]")).Click();
             return this;
         }
 
@@ -68,13 +99,14 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            contactCache = null;
             return this;
         }
 
         //Select checkbox of contact to edit/delet
         public ContactHelper SelectContact(int c)
         {
-            driver.FindElement(By.XPath("//input[@name='selected[]']["+ c +"]")).Click();
+            driver.FindElement(By.XPath("//input[@name='selected[]']["+ (c + 1) +"]")).Click();
             return this;
         }
 
@@ -119,6 +151,7 @@ namespace WebAddressbookTests
         public ContactHelper Submit()
         {
             driver.FindElement(By.Name("submit")).Click();
+            contactCache = null;
             return this;
         }
     }

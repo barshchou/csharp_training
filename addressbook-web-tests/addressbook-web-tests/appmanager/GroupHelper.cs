@@ -27,9 +27,39 @@ namespace WebAddressbookTests
             return this;
         }
 
+        private List<GroupData> groupCache = null;
+
+        //List of group elements
+        public List<GroupData> GetGroupList()
+        {
+            if (groupCache == null)
+            {
+                groupCache = new List<GroupData>();
+                manager.Navigator.GoToGroupPage();
+
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+
+                foreach (IWebElement element in elements)
+                {
+                    GroupData group = new GroupData(element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    };
+                    groupCache.Add(group);
+                }
+            }
+            return new List<GroupData>(groupCache);
+        }
+
+        public int GetGroupCount()
+        {
+            manager.Navigator.GoToGroupPage();
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
         public bool CheckElement()
         {
-            manager.Navigator.OpenHomePage();
+            manager.Navigator.GoToGroupPage();
             return (IsElementPresent(By.XPath("//input[@name='selected[]']")));
         }
 
@@ -58,6 +88,7 @@ namespace WebAddressbookTests
         public GroupHelper SubmitModifyGroup()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -87,6 +118,7 @@ namespace WebAddressbookTests
         public GroupHelper Submit()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -98,13 +130,14 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//input[@name='selected[]'][" + index + "]")).Click();
+            driver.FindElement(By.XPath("//input[@name='selected[]'][" + (index + 1) + "]")).Click();
             return this;
         }
 
         public GroupHelper DeleteGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCache = null;
             return this;
         }
     }
