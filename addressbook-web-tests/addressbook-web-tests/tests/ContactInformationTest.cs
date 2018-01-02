@@ -21,7 +21,8 @@ namespace WebAddressbookTests
 
             Assert.AreEqual(fromForm, fromDetails);
             Assert.AreEqual(fromForm.AllPhonesCleanUp, fromDetails.AllPhones);
-            //Assert.AreEqual(fromForm.Fullname, fromDetails.Fullname);
+            Assert.AreEqual(fromForm.Fullname, fromDetails.Fullname);
+            Assert.AreEqual(fromForm.AllEmailsCleanUp, fromDetails.AllEmails);
 
             Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);

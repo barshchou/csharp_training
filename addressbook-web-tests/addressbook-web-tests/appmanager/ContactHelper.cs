@@ -8,6 +8,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Text.RegularExpressions;
 
+
 namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
@@ -38,24 +39,21 @@ namespace WebAddressbookTests
                         
             string content = driver.FindElement(By.CssSelector("#content")).Text;
             
-            string[] s = content.Split('\n','\r');
+            string[] s = content.Split('\n');
 
-            /*for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
-                if (s[i] != "\r\n")
-                {
-                    s[i] = s[i].TrimEnd('\r', '\n');
-                }
-            }*/
+               s[i] = Regex.Replace(s[i], "[\n\r]", "");
+            }
+            
             string[] fullName = s[0].Split(' ');
             string firstname = fullName[0];
             string lastname = fullName[1];
             string fullname = firstname + lastname;
 
-            string address = s[2];
-            string allPhones = s[6]+s[8]+s[10];
-            string allEmails = s[11]+s[13];
-
+            string address = s[1];
+            string allPhones = s[3]+s[4]+s[5];
+            string allEmails = s[7]+s[8];
 
             return new ContactData(firstname, lastname)
             {
