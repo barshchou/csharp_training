@@ -19,10 +19,7 @@ namespace WebAddressbookTests
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
             ContactData fromDetails = app.Contacts.GetContactInformationFromDetails(0);
 
-            Assert.AreEqual(fromForm, fromDetails);
-            Assert.AreEqual(fromForm.AllPhonesCleanUp, fromDetails.AllPhones);
-            Assert.AreEqual(fromForm.Fullname, fromDetails.Fullname);
-            Assert.AreEqual(fromForm.AllEmailsCleanUp, fromDetails.AllEmails);
+            Assert.AreEqual(fromForm.Content, fromDetails.Content);
 
             Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);

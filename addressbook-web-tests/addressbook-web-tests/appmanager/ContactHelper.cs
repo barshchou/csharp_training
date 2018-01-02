@@ -25,12 +25,6 @@ namespace WebAddressbookTests
             Submit();
             return this;
         }
-
-        public string CheckLocator()
-        {
-            string text = driver.FindElement(By.CssSelector("#content")).Text;
-            return text;
-        }
         
         public ContactData GetContactInformationFromDetails(int index)
         {
@@ -38,31 +32,11 @@ namespace WebAddressbookTests
             OpenDetailsPage(index);
                         
             string content = driver.FindElement(By.CssSelector("#content")).Text;
+            content = Regex.Replace(content, "[\n\r:MWH ]", "");
             
-            string[] s = content.Split('\n');
-
-            for (int i = 0; i < s.Length; i++)
-            {
-               s[i] = Regex.Replace(s[i], "[\n\r]", "");
-            }
-            
-            string[] fullName = s[0].Split(' ');
-            string firstname = fullName[0];
-            string lastname = fullName[1];
-            string fullname = firstname + lastname;
-
-            string address = s[1];
-            string allPhones = s[3]+s[4]+s[5];
-            string allEmails = s[7]+s[8];
-
             return new ContactData()
             {
-               Firstname = firstname,
-               Lastname = lastname,
-               Fullname = fullname,
-               Address = address,
-               AllPhones = allPhones,
-               AllEmails = allEmails
+               Content = content
             };
         }
         

@@ -11,13 +11,7 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
-        private string fullname;
-
-        /*public ContactData(string firstname, string lastname)
-        {
-            Firstname = firstname;
-            Lastname = lastname;
-        }*/
+        private string content;
 
         public bool Equals(ContactData other)
         {
@@ -51,22 +45,22 @@ namespace WebAddressbookTests
             return Lastname + " " + Firstname;
         }
 
-        public string Fullname
+        public string Content
         {
             get
             {
-                if (fullname != null)
+                if (content != null)
                 {
-                    return fullname;
+                    return content;
                 }
                 else
                 {
-                    return ((Firstname) + (Middlename) + (Lastname)).Trim();
+                    return (Firstname + Middlename + Lastname + Address + Home + Mobile + Work + Email + Email2 + Email3).Trim();
                 }
             }
             set
             {
-                fullname = value;
+                content = value;
             }
         }
 
@@ -86,45 +80,6 @@ namespace WebAddressbookTests
             set
             {
                 allPhones = value;
-            }
-        }
-
-        public string AllPhonesCleanUp
-        {
-            get
-            {
-                if (allPhones == null)
-                {
-                    return ("H: "+ Home + "M: " + Mobile + "W: " + Work).Trim();
-                }
-                else
-                {
-                    return allPhones;
-                }
-            }
-            set
-            {
-                allPhones = value;
-            }
-        }
-
-        public string AllEmailsCleanUp
-        {
-            get
-            {
-                if (allEmails == null)
-                {
-                    return (Email + Email2 + Email3).Trim();
-                    
-                }
-                else
-                {
-                    return allEmails;
-                }
-            }
-            set
-            {
-                allEmails = value;
             }
         }
 
@@ -155,7 +110,6 @@ namespace WebAddressbookTests
             }
             return Regex.Replace(phone, "[ -()MWH:]", "") + "\r\n";
         }
-        
 
         public string Id { get; set; }
 
