@@ -11,6 +11,7 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private string fullname;
 
         public ContactData(string firstname, string lastname)
         {
@@ -50,6 +51,25 @@ namespace WebAddressbookTests
             return Lastname + " " + Firstname;
         }
 
+        public string Fullname
+        {
+            get
+            {
+                if (fullname != null)
+                {
+                    return fullname;
+                }
+                else
+                {
+                    return (Firstname + "\r\n" + Middlename + "\r\n" + Lastname + "\r\n").Trim();
+                }
+            }
+            set
+            {
+                fullname = value;
+            }
+        }
+
         public string AllPhones
         {
             get
@@ -60,7 +80,26 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUp(Home) + CleanUp(Mobile)+ CleanUp(Work)).Trim();
+                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work)).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        public string AllPhonesCleanUp
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return ("H: "+ Home + "M: " + Mobile + "W: " + Work).Trim();
+                }
+                else
+                {
+                    return allPhones;
                 }
             }
             set
@@ -94,7 +133,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+            return Regex.Replace(phone, "[ -()MWH:]", "") + "\r\n";
         }
 
         public string Id { get; set; }

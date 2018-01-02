@@ -25,7 +25,54 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactData GetContactInformationFromEditForm(int index)
+        public string CheckLocator()
+        {
+            string text = driver.FindElement(By.CssSelector("#content")).Text;
+            return text;
+        }
+        
+        public ContactData GetContactInformationFromDetails(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            OpenDetailsPage(index);
+                        
+            string content = driver.FindElement(By.CssSelector("#content")).Text;
+            
+            string[] s = content.Split('\n','\r');
+
+            /*for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] != "\r\n")
+                {
+                    s[i] = s[i].TrimEnd('\r', '\n');
+                }
+            }*/
+            string[] fullName = s[0].Split(' ');
+            string firstname = fullName[0];
+            string lastname = fullName[1];
+            string fullname = firstname + lastname;
+
+            string address = s[2];
+            string allPhones = s[6]+s[8]+s[10];
+            string allEmails = s[11]+s[13];
+
+
+            return new ContactData(firstname, lastname)
+            {
+               Fullname = fullname,
+               Address = address,
+               AllPhones = allPhones,
+               AllEmails = allEmails
+            };
+        }
+        
+        public ContactHelper OpenDetailsPage(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+        public ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.OpenHomePage();
             IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
@@ -44,7 +91,7 @@ namespace WebAddressbookTests
 
         }
 
-        public ContactData GetContactInformationFromTable(int index)
+        public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.OpenHomePage();
             EditButton(index);
@@ -128,7 +175,7 @@ namespace WebAddressbookTests
         }
 
         //Find button "Update" method
-        private ContactHelper ModifyContact()
+        public ContactHelper ModifyContact()
         {
             driver.FindElement(By.Name("update")).Click();
             contactCache = null;
@@ -136,7 +183,7 @@ namespace WebAddressbookTests
         }
 
         //Find button "Edit" method
-        private ContactHelper EditButton(int c)
+        public ContactHelper EditButton(int c)
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])["+ (c + 1) +"]")).Click();
             return this;
