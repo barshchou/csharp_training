@@ -14,19 +14,29 @@ namespace WebAddressbookTests
         public void ContactModifyTest()
         {
             // Data input
-            ContactData contact = new ContactData("aaa", "aaa");
-            contact.Nickname = "aaaa";
-            contact.Bday = "1";
-            contact.Bmonth = "May";
-            contact.Aday = "2";
-            contact.Amonth = "September";
+            ContactData contact = new ContactData()
+            {
+                Firstname = "aaa",
+                Lastname = "aaa",
+                Nickname = "aaaa",
+                Bday = "1",
+                Bmonth = "May",
+                Aday = "2",
+                Amonth = "September"
+        };
+            
 
-            ContactData newData = new ContactData("bbbb", "tttttttt");
-            newData.Nickname = "ppppppp";
-            newData.Bday = "12";
-            newData.Bmonth = "July";
-            newData.Aday = "24";
-            newData.Amonth = "August";
+            ContactData newData = new ContactData()
+            {
+                Firstname = "tttt",
+                Lastname = "yyyyyyy",
+                Nickname = "ppppppp",
+                Bday = "12",
+                Bmonth = "July",
+                Aday = "24",
+                Amonth = "August"
+        };
+            
 
             //Action 
             //Execute method using Contacts helper

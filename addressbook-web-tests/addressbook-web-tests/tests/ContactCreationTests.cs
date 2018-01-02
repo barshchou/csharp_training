@@ -15,12 +15,16 @@ namespace WebAddressbookTests
         public void ContactCreationTest()
         {
             //Data input
-            ContactData contact = new ContactData("g", "h");
-            contact.Nickname = "nickn";
-            contact.Bday = "6";
-            contact.Bmonth = "May";
-            contact.Aday = "12";
-            contact.Amonth = "June";
+            ContactData contact = new ContactData()
+            {
+            Firstname = "h",
+            Lastname = "g",
+            Nickname = "nickn",
+            Bday = "6",
+            Bmonth = "May",
+            Aday = "12",
+            Amonth = "June"
+            };
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 

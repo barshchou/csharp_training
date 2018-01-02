@@ -13,11 +13,11 @@ namespace WebAddressbookTests
         private string allEmails;
         private string fullname;
 
-        public ContactData(string firstname, string lastname)
+        /*public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
-        }
+        }*/
 
         public bool Equals(ContactData other)
         {

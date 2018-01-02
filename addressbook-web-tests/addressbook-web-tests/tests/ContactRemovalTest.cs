@@ -16,12 +16,16 @@ namespace WebAddressbookTests
         {
             //Action 
             //Execute method using Contacts helper
-            ContactData contact = new ContactData("bbb", "bbb");
-            contact.Nickname = "bbbv";
-            contact.Bday = "2";
-            contact.Bmonth = "October";
-            contact.Aday = "3";
-            contact.Amonth = "December";
+            ContactData contact = new ContactData()
+            {
+                Firstname = "bbb",
+                Lastname = "bbb",
+                Nickname = "bbbv",
+                Bday = "2",
+                Bmonth = "October",
+                Aday = "3",
+                Amonth = "December"
+            };
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             ContactData toBeRemoved = oldContacts[0];

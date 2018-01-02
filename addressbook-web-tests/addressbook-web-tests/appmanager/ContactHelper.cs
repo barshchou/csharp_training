@@ -55,8 +55,10 @@ namespace WebAddressbookTests
             string allPhones = s[3]+s[4]+s[5];
             string allEmails = s[7]+s[8];
 
-            return new ContactData(firstname, lastname)
+            return new ContactData()
             {
+               Firstname = firstname,
+               Lastname = lastname,
                Fullname = fullname,
                Address = address,
                AllPhones = allPhones,
@@ -80,8 +82,10 @@ namespace WebAddressbookTests
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
 
-            return new ContactData(firstName, lastName)
+            return new ContactData()
             {
+                Firstname = firstName,
+                Lastname = lastName,
                 Address = address,
                 AllPhones =  allPhones,
                 AllEmails = allEmails
@@ -105,8 +109,10 @@ namespace WebAddressbookTests
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            return new ContactData(firstname, lastname)
+            return new ContactData()
             {
+                Firstname = firstname,
+                Lastname = lastname,
                 Address = address,
                 Home = homePhone,
                 Mobile = mobilePhone,
@@ -141,10 +147,15 @@ namespace WebAddressbookTests
                 foreach (IWebElement element in elements)
                 {
                     string[] s = element.Text.Split(' ');
-                    string firstname = s[0];
-                    string lastname = s[1];
+                    string lastname = s[0];
+                    string firstname = s[1];
 
-                    ContactData contact = new ContactData(lastname, firstname) { Id = element.FindElement(By.TagName("input")).GetAttribute("value") };
+                    ContactData contact = new ContactData()
+                    {
+                        Firstname = firstname,
+                        Lastname = lastname,
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    };
                     contactCache.Add(contact);
                 }
             }
