@@ -116,18 +116,19 @@ namespace WebAddressbookTests
                 contactCache = new List<ContactData>();
                 manager.Navigator.OpenHomePage();
 
-                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+                IList<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
 
                 foreach (IWebElement element in elements)
                 {
-                    string[] s = element.Text.Split(' ');
-                    string lastname = s[0];
-                    string firstname = s[1];
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+
+                    string firstName = cells[2].Text;
+                    string lastName = cells[1].Text;
 
                     ContactData contact = new ContactData()
                     {
-                        Firstname = firstname,
-                        Lastname = lastname,
+                        Firstname = firstName,
+                        Lastname = lastName,
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     };
                     contactCache.Add(contact);

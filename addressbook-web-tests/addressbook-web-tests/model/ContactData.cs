@@ -32,7 +32,35 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return Lastname.CompareTo(other.Lastname);// +(Firstname.CompareTo(other.Firstname));
+
+            if (Lastname.CompareTo(other.Lastname) == 0)
+            {
+                if (Firstname.CompareTo(other.Firstname) > 0)
+                {
+                    return 1;
+                }
+                else 
+                if (Firstname.CompareTo(other.Firstname) == 0)
+                {
+                    return 0;
+                }
+                return -1;
+            }
+            else
+            {
+                if (Lastname.CompareTo(other.Lastname) > 0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    if (Firstname.CompareTo(other.Firstname) <= 0)
+                    {
+                        return -1;
+                    }
+                    return 1;
+                }
+            } 
         }
 
         public override int GetHashCode()
