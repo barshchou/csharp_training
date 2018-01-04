@@ -61,13 +61,45 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Firstname + Middlename + Lastname + Address + Home + Mobile + Work + Email + Email2 + Email3).Trim();
+                    return (Firstname + " " + Lastname + "\r\n" + Address + "\r\n" +
+
+                    PhoneCleanUp(Home) + PhoneCleanUp(Mobile) + PhoneCleanUp(Work) + "\r\n" 
+                            
+                    + (EmailCleanUp(Email) + EmailCleanUp(Email2) + EmailCleanUp(Email3)).Trim()).Trim();
                 }
             }
             set
             {
                 content = value;
             }
+        }
+
+        public string EmailCleanUp(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email + "\r\n";
+        }
+
+        public string PhoneCleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            else 
+                if (phone == Home)
+                {
+                    return "H: " + phone + "\r\n";
+                }
+                else if (phone == Mobile)
+                {
+                    return "M: " + phone + "\r\n";
+                }
+
+            return "W: " + phone + "\r\n";
         }
 
         public string AllPhones
@@ -99,7 +131,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Email +"\r\n" + Email2 + "\r\n" + Email3 + "\r\n").Trim();
+                    return (EmailCleanUp(Email) + EmailCleanUp(Email2) + EmailCleanUp(Email3)).Trim();
                 }
             }
             set
@@ -114,7 +146,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return Regex.Replace(phone, "[ -()MWH:]", "") + "\r\n";
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
         }
 
         public string Id { get; set; }

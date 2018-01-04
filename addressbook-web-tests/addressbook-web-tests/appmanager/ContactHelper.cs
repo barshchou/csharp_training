@@ -32,8 +32,6 @@ namespace WebAddressbookTests
             OpenDetailsPage(index);
                         
             string content = driver.FindElement(By.CssSelector("#content")).Text;
-            content = Regex.Replace(content, "[\n\r:MWH ]", "");
-            
             return new ContactData()
             {
                Content = content
