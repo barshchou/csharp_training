@@ -61,7 +61,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Firstname + " " + Lastname + "\r\n" + Address + "\r\n" +
+                    return (Firstname + " " + Lastname + "\r\n" + AddressCleanUp(Address) + "\r\n" +
 
                     PhoneCleanUp(Home) + PhoneCleanUp(Mobile) + PhoneCleanUp(Work) + "\r\n" 
                             
@@ -72,6 +72,16 @@ namespace WebAddressbookTests
             {
                 content = value;
             }
+        }
+
+        public string AddressCleanUp(string address)
+        {
+            if (address == null || address == "")
+            {
+                return "";
+            }
+
+            return address + "\r\n";
         }
 
         public string EmailCleanUp(string email)
