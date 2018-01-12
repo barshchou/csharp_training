@@ -212,11 +212,11 @@ namespace WebAddressbookTests
             Type(By.Name("email2"), contact.Email2);
             Type(By.Name("email3"), contact.Email3);
             Type(By.Name("homepage"), contact.Homepage);
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
-            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
+           // new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
+           // new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
             Type(By.Name("byear"), contact.Byear);
-            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(contact.Aday);
-            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.Amonth);
+           // new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(contact.Aday);
+           // new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.Amonth);
             Type(By.Name("ayear"), contact.Ayear);
             Type(By.Name("address2"), contact.Address2);
             Type(By.Name("phone2"), contact.Phone2);

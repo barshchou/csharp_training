@@ -14,21 +14,32 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupRemovalTests : AuthTestBase //Наследование от TestAuth потому что предварительный логин требуется
     {
-        [Test]
-        public void GroupRemovalTest()
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
-            //Remove group using Group hepler
-            GroupData group = new GroupData("test_new");
-            group.Header = "aaa";
-            group.Footer = "bbb";
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 3; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(100)
+                });
+            }
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            return groups;
+        }
 
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+        public void GroupRemovalTest(GroupData group)
+        {
             //Check if element is present and if not add new
             if (!app.Groups.CheckElement())
             {
                 app.Groups.Create(group);
             }
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[0];
 
             app.Groups.Remove(0);
 
@@ -36,7 +47,7 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            GroupData toBeRemoved = oldGroups[0];
+            
             oldGroups.RemoveAt(0);
             //oldGroups.Sort();
             //newGroups.Sort();

@@ -11,29 +11,31 @@ namespace WebAddressbookTests
 
     public class ContactRemovalTests : AuthTestBase //Наследование от TestAuth потому что предварительный логин требуется
     {
-        [Test]
-        public void ContactRemovalTest()
+        public static IEnumerable<ContactData> RandomContactDataProvider()
         {
-            //Action 
-            //Execute method using Contacts helper
-            ContactData contact = new ContactData()
+            List<ContactData> contacts = new List<ContactData>();
+            for (int i = 0; i < 1; i++)
             {
-                Firstname = "bbb",
-                Lastname = "bbb",
-                Nickname = "bbbv",
-                Bday = "2",
-                Bmonth = "October",
-                Aday = "3",
-                Amonth = "December"
-            };
+                contacts.Add(new ContactData
+                {
+                    Firstname = GenerateRandomString(20),
+                    Lastname = GenerateRandomString(20),
+                });
+            }
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-            ContactData toBeRemoved = oldContacts[0];
+            return contacts;
+        }
 
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void ContactRemovalTest(ContactData contact)
+        {
             if (!app.Contacts.CheckElement())
             {
                 app.Contacts.Create(contact);
             }
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData toBeRemoved = oldContacts[0];
 
             app.Contacts.Remove(0);
 

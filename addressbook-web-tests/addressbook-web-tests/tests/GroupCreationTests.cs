@@ -13,8 +13,8 @@ namespace WebAddressbookTests
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
-            List < GroupData > groups = new List<GroupData>();
-            for (int i = 0; i < 5; i++)
+            List <GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 3; i++)
             {
                 groups.Add(new GroupData(GenerateRandomString(30))
                 {
