@@ -9,7 +9,7 @@ namespace WebAddressbookTests
 {
     [TestFixture]
 
-    public class GroupModifyTests : AuthTestBase //Наследование от TestAuth потому что предварительный логин требуется
+    public class GroupModifyTests : GroupTestBase //Наследование от TestAuth потому что предварительный логин требуется
     {
         [Test]
         public void GroupModifyTest()
@@ -23,7 +23,7 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0]; //Save element that will be modified
 
             //Action
@@ -33,12 +33,12 @@ namespace WebAddressbookTests
                 app.Groups.Create(group);
             }
 
-            app.Groups.Modify(newData, 0);
+            app.Groups.Modify(newData, oldData);
 
             //Check if count of elements are equal
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups[0].Name = newData.Name; //Add to the newgroup list the name of modified element
             oldGroups.Sort();
             newGroups.Sort();

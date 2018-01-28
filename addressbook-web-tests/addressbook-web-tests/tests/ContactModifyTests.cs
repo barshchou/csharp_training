@@ -41,7 +41,7 @@ namespace WebAddressbookTests
             //Action 
             //Execute method using Contacts helper
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll(); //app.Contacts.GetContactList();
             ContactData oldData = oldContacts[0];
 
 
@@ -50,11 +50,11 @@ namespace WebAddressbookTests
                 app.Contacts.Create(contact);
             }
 
-            app.Contacts.Modify(newData, 0);
+            app.Contacts.Modify(newData, oldData);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll(); //app.Contacts.GetContactList();
 
             oldContacts[0].Firstname = newData.Firstname;
             oldContacts[0].Lastname = newData.Lastname;

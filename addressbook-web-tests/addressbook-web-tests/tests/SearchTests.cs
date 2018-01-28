@@ -17,7 +17,7 @@ namespace WebAddressbookTests
         {
             int searchCount = app.Contacts.GetContactCount();
 
-            List<ContactData> contacts = app.Contacts.GetContactList();
+            List<ContactData> contacts = ContactData.GetAll();
 
             int elements = contacts.Count();
 
