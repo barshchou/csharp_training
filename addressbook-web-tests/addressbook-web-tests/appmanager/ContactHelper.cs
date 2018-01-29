@@ -281,6 +281,32 @@ namespace WebAddressbookTests
             new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
         }
 
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToRemoveFrom(group.Name);
+            SelectContactToRemove(contact.Id);
+            CommitRemovingContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void SelectContactToRemove(string contactId)
+        {
+            driver.FindElement(By.XPath("//input[@id='"+ contactId + "']")).Click();
+        }
+
+        public void SelectGroupToRemoveFrom(string groupName)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(groupName);
+        }
+
+        public void CommitRemovingContactFromGroup()
+        {
+            driver.FindElement(By.XPath("//input[@name='remove']")).Click();
+        }
+
         public void CommitAddingContactToGroup()
         {
             driver.FindElement(By.Name("add")).Click();
