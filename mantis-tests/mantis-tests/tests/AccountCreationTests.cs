@@ -10,6 +10,7 @@ namespace mantis_tests
     [TestFixture]
     public class AccountCreationTests : TestBase
     {
+        
         [TestFixtureSetUp]
         public void setupConfig()
         {
@@ -19,25 +20,30 @@ namespace mantis_tests
                 app.Ftp.Upload("/config/config_inc.php", localFile);
             };
         }
+        
 
         [Test]
-        public void TestACcountRegistration()
+        public void TestAccountRegistration()
         {
             AccountData account = new AccountData()
             {
-                Name = "testuser",
+                Name = "testuser13",
                 Password = "password",
-                Email = "testuser@localhost.localadmin"
+                Email = "testuser13@localhost.localdomain"
             };
+
+            app.James.Delete(account);
+            app.James.Add(account);
 
             app.Registration.Register(account);
         }
-
+        
         [TestFixtureTearDown]
 
         public void restoreConfig()
         {
             app.Ftp.RestoreBackupFile("/config/config_inc.php");
         }
+        
     }
 }
