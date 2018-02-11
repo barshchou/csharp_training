@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="appmanager\FtpHelper.cs" />
     <Compile Include="appmanager\JamesHelper.cs" />
+    <Compile Include="appmanager\LoginHelper.cs" />
     <Compile Include="appmanager\MailHelper.cs" />
     <Compile Include="appmanager\RegistrationHelper.cs" />
     <Compile Include="appmanager\TelnetInterface.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="appmanager\HelperBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\TestBase.cs" />
+    <Compile Include="tests\ProjectCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config_inc.php">
