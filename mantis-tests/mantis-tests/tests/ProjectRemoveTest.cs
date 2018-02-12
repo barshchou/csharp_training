@@ -1,13 +1,14 @@
 ﻿using System;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace mantis_tests
 {
     [TestFixture]
-    public class ProjectCreationTests : TestBase
+    public class ProjectRemovalTests : TestBase
     {
         [Test]
-        public void ProjectCreationTest()
+        public void ProjectRemoveTest()
         {
             AccountData adminAccount = new AccountData()
             {
@@ -21,7 +22,13 @@ namespace mantis_tests
                 Description = "test_description"
             };
 
-            app.manager.CreateNewProject(adminAccount, projectName);
+            if (!app.manager.CheckElement(adminAccount))
+            {
+                app.manager.CreateNewProject(adminAccount, projectName);
+            }
+            
+            app.manager.Remove(adminAccount, 0);
+
         }
     }
 }

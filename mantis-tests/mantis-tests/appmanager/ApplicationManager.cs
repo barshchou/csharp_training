@@ -21,8 +21,10 @@ namespace mantis_tests
         public FtpHelper Ftp { get; set; }
         public JamesHelper James { get; set; }
         public MailHelper Mail { get; set; }
-        public LoginHelper loginHelper { get; set; }
+        public LoginHelper loginHelper;
         public NavigatorHelper navigator;
+        public ManageProjectHelper manager;
+        public ManagementMenuHelper menuHelper;
 
         //Variable links to helpers variables 
 
@@ -44,6 +46,8 @@ namespace mantis_tests
             Mail = new MailHelper(this);
             loginHelper = new LoginHelper(this);
             navigator = new NavigatorHelper(this, baseURL);
+            manager = new ManageProjectHelper(this);
+            menuHelper = new ManagementMenuHelper(this);
 
         }
 

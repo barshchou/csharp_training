@@ -35,7 +35,7 @@ namespace mantis_tests
             {
                 return;
             }
-            driver.FindElements(By.CssSelector(".menu-text"))[5].Click();
+            driver.FindElement(By.XPath("//span[contains(text(),'Manage')]")).Click();
         }
     }
 }
