@@ -8,6 +8,17 @@ namespace mantis_tests
 {
     public class ProjectData
     {
+        public ProjectData(string name)
+        {
+            ProjectName = name;
+        }
+
+        public ProjectData(string name, string description)
+        {
+            ProjectName = name;
+            Description = description;
+        }
+
         public string ProjectName { get; set; }
         public string Description { get; set; }
     }

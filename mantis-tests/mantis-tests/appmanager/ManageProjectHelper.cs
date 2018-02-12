@@ -18,15 +18,64 @@ namespace mantis_tests
 
         public void CreateNewProject(AccountData adminAccount, ProjectData projectName)
         {
-            manager.loginHelper.Login(adminAccount);
-            manager.navigator.GoToManagePage();
-            manager.menuHelper.NavigateToManageProjectTab();
+            LoginAndNavigate(adminAccount);
             OpenCreateNewProjectForm();
             FillNewProjectForm(projectName);
             SubmitProjectCreation();
         }
 
-        private void SubmitProjectCreation()
+        private void LoginAndNavigate(AccountData adminAccount)
+        {
+            manager.loginHelper.Login(adminAccount);
+            manager.navigator.GoToManagePage();
+            manager.menuHelper.NavigateToManageProjectTab();
+        }
+
+        private List<ProjectData> projectCache = null;
+
+        public List<ProjectData> GetProjectList(AccountData adminAccount)
+        {
+            if (projectCache == null)
+            {
+                projectCache = new List<ProjectData>();
+                LoginAndNavigate(adminAccount);
+
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tbody//a[@href]"));
+
+                foreach (IWebElement element in elements)
+                {
+                    ProjectData project = new ProjectData(null)
+                    {
+                        ProjectName = element.FindElement(By.XPath("//tbody//a[@href]")).Text
+                    };
+                    projectCache.Add(project);
+                }
+            }
+            return new List<ProjectData>(projectCache);
+        }
+
+        public bool ProjectExists(AccountData adminAccount, ProjectData projectName)
+        {
+            int i = 0;
+            GetProjectList(adminAccount);
+            foreach(ProjectData project in projectCache)
+            {
+                if (projectName.ProjectName == project.ProjectName)
+                {
+                    i++;
+                }
+            }
+            if (i == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void SubmitProjectCreation()
         {
             driver.FindElement(By.XPath("//input[@value='Add Project']")).Click();
         }
@@ -48,9 +97,20 @@ namespace mantis_tests
             SubmiteRemove();
         }
 
+        public void DeleteProject(ProjectData projectName)
+        {
+            SelectProjectToDelete(projectName);
+            SubmiteRemove();
+        }
+
         private void SelectProjectToDelete(int index)
         {
             driver.FindElements(By.XPath("//tbody//a[@href]"))[index].Click();
+        }
+
+        private void SelectProjectToDelete(ProjectData projectName)
+        {
+            driver.FindElement(By.XPath("//tbody//a[contains(text(),'"+ projectName.ProjectName +"')]")).Click();
         }
 
         public void SubmiteRemove()
@@ -61,24 +121,25 @@ namespace mantis_tests
 
         public bool CheckElement(AccountData adminAccount)
         {
-            manager.loginHelper.Login(adminAccount);
-            manager.navigator.GoToManagePage();
-            manager.menuHelper.NavigateToManageProjectTab();
+            LoginAndNavigate(adminAccount);
             return (IsElementPresent(By.XPath("//td[contains(text(), 'development')]")));
         }
 
         public void Remove(AccountData adminAccount, int index)
         {
-            manager.loginHelper.Login(adminAccount);
-            manager.navigator.GoToManagePage();
-            manager.menuHelper.NavigateToManageProjectTab();
+            LoginAndNavigate(adminAccount);
             DeleteProject(index);
         }
 
-        public int GetProjectCount()
+        public void Remove(AccountData adminAccount, ProjectData projectName)
         {
-            manager.navigator.GoToManagePage();
-            manager.menuHelper.NavigateToManageProjectTab();
+            LoginAndNavigate(adminAccount);
+            DeleteProject(projectName);
+        }
+
+        public int GetProjectCount(AccountData adminAccount)
+        {
+            LoginAndNavigate(adminAccount);
             return driver.FindElements(By.XPath("//td[contains(text(), 'development')]")).Count;
         }
     }

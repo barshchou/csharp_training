@@ -15,11 +15,16 @@ namespace mantis_tests
                 Password = "root"
             };
 
-            ProjectData projectName = new ProjectData()
+            ProjectData projectName = new ProjectData(null)
             {
                 ProjectName = "test_new",
                 Description = "test_description"
             };
+
+            if (app.manager.ProjectExists(adminAccount, projectName))
+            {
+                app.manager.Remove(adminAccount, projectName);
+            }
 
             app.manager.CreateNewProject(adminAccount, projectName);
         }
