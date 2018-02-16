@@ -26,6 +26,7 @@ namespace mantis_tests
         public ManageProjectHelper manager;
         public ManagementMenuHelper menuHelper;
         public AdminHelper adminHelper;
+        public APIHelper API { get; set; }
 
         //Variable links to helpers variables 
 
@@ -49,7 +50,8 @@ namespace mantis_tests
             navigator = new NavigatorHelper(this, baseURL);
             manager = new ManageProjectHelper(this);
             menuHelper = new ManagementMenuHelper(this);
-            adminHelper = new AdminHelper(this, baseURL); 
+            adminHelper = new AdminHelper(this, baseURL);
+            API = new APIHelper(this);
 
         }
 
