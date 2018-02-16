@@ -8,7 +8,6 @@ namespace mantis_tests
 {
     public class APIHelper : HelperBase
     {
-        public string baseUrl;
         public APIHelper(ApplicationManager manager) : base(manager) { }
 
         public void CreateNewIssue(AccountData account, ProjectData project, IssueData issueData)

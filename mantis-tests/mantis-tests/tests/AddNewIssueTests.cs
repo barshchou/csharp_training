@@ -20,9 +20,9 @@ namespace mantis_tests
                 Password = "root"
             };
 
-            ProjectData project = new ProjectData()
+            ProjectData project = new ProjectData(null)
             {
-                Id = "Test_project",
+                Id = "test_new",
             };
 
             IssueData issue = new IssueData()

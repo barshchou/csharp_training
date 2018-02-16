@@ -10,7 +10,7 @@ namespace mantis_tests
     [TestFixture]
     public class AccountCreationTests : TestBase
     {
-        /*
+        
         [TestFixtureSetUp]
         public void setupConfig()
         {
@@ -20,7 +20,7 @@ namespace mantis_tests
                 app.Ftp.Upload("/config/config_inc.php", localFile);
             };
         }
-        */
+        
 
         [Test]
         public void TestAccountRegistration()
@@ -41,18 +41,18 @@ namespace mantis_tests
             }
             
 
-            //app.James.Delete(account);
-            //app.James.Add(account);
+            app.James.Delete(account);
+            app.James.Add(account);
 
             app.Registration.Register(account);
         }
-        /*
+        
         [TestFixtureTearDown]
 
         public void restoreConfig()
         {
             app.Ftp.RestoreBackupFile("/config/config_inc.php");
         }
-        */
+        
     }
 }
