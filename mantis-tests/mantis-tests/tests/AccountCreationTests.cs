@@ -10,7 +10,7 @@ namespace mantis_tests
     [TestFixture]
     public class AccountCreationTests : TestBase
     {
-        
+        /*
         [TestFixtureSetUp]
         public void setupConfig()
         {
@@ -20,11 +20,12 @@ namespace mantis_tests
                 app.Ftp.Upload("/config/config_inc.php", localFile);
             };
         }
-        
+        */
 
         [Test]
         public void TestAccountRegistration()
         {
+           
             AccountData account = new AccountData()
             {
                 Name = "testuser14",
@@ -32,18 +33,26 @@ namespace mantis_tests
                 Email = "testuser14@localhost.localdomain"
             };
 
-            app.James.Delete(account);
-            app.James.Add(account);
+            List<AccountData> accounts = app.adminHelper.GetAllAccounts();
+            AccountData existingAccount = accounts.Find(x => x.Name == account.Name);
+            if (existingAccount != null)
+            {
+                app.adminHelper.DeleteAccount(existingAccount);
+            }
+            
+
+            //app.James.Delete(account);
+            //app.James.Add(account);
 
             app.Registration.Register(account);
         }
-        
+        /*
         [TestFixtureTearDown]
 
         public void restoreConfig()
         {
             app.Ftp.RestoreBackupFile("/config/config_inc.php");
         }
-        
+        */
     }
 }

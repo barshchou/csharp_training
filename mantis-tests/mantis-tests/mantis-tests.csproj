@@ -53,6 +53,15 @@
     <Reference Include="OpaqueMail.Net, Version=1.6.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OpaqueMail.1.6.6\lib\OpaqueMail.Net.dll</HintPath>
     </Reference>
+    <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\RazorHosting.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleBrowser, Version=0.5.61.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\SimpleBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleBrowser.WebDriver, Version=0.5.37.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.WebDriver.0.5.37\lib\net40\SimpleBrowser.WebDriver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -72,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="appmanager\AdminHelper.cs" />
     <Compile Include="appmanager\FtpHelper.cs" />
     <Compile Include="appmanager\JamesHelper.cs" />
     <Compile Include="appmanager\LoginHelper.cs" />

@@ -25,6 +25,7 @@ namespace mantis_tests
         public NavigatorHelper navigator;
         public ManageProjectHelper manager;
         public ManagementMenuHelper menuHelper;
+        public AdminHelper adminHelper;
 
         //Variable links to helpers variables 
 
@@ -39,7 +40,7 @@ namespace mantis_tests
             options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
             options.UseLegacyImplementation = true;
             driver = new FirefoxDriver(options);
-            baseURL = "http://localhost/";
+            baseURL = "http://localhost/mantisbt-2.2.0";
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
@@ -48,6 +49,7 @@ namespace mantis_tests
             navigator = new NavigatorHelper(this, baseURL);
             manager = new ManageProjectHelper(this);
             menuHelper = new ManagementMenuHelper(this);
+            adminHelper = new AdminHelper(this, baseURL); 
 
         }
 
@@ -71,7 +73,7 @@ namespace mantis_tests
             if (! app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.2.0/login_page.php";
+                newInstance.driver.Url = newInstance.baseURL + "/login_page.php";
                 app.Value = newInstance;
             }
             return app.Value;
