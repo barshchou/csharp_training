@@ -14,8 +14,8 @@ namespace mantis_tests
                 Name = "administrator",
                 Password = "root"
             };
-            /*
-            ProjectData projectName = new ProjectData(null)
+            
+            ProjectData projectName = new ProjectData()
             {
                 ProjectName = "test_new",
                 Description = "test_description"
@@ -27,7 +27,7 @@ namespace mantis_tests
             }
 
             app.manager.CreateNewProject(adminAccount, projectName);
-            */
+            
         }
     }
 }

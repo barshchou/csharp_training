@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 namespace mantis_tests
 {
     [TestFixture]
-    public class AddNewIssueTests : TestBase
+
+    public class AddProjectTestApi : TestBase
     {
+    
         [Test]
 
-        public void AddNewIssueTest()
+        public void AddProjectTest()
         {
             AccountData account = new AccountData()
             {
@@ -25,14 +27,7 @@ namespace mantis_tests
                 Id = "12"
             };
 
-            IssueData issue = new IssueData()
-            {
-                Summary = "some_short_text",
-                Description = "some_long_text",
-                Category  = "General"
-            };
-
-            app.API.CreateNewIssue(account, project, issue);
+            app.API.GetProjectsList(account);
         }
     }
 }

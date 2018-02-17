@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,21 @@ namespace mantis_tests
             issue.project.id = project.Id;
 
             client.mc_issue_add(account.Name, account.Password, issue);
+        }
+
+        public void GetProjectsList(AccountData account)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData[] projects = client.mc_projects_get_user_accessible(account.Name, account.Password);
+            List<ProjectData> _projects = new List<ProjectData>();
+            for (int i = 0; i < projects.Length; i++)
+            {
+                ProjectData project = new ProjectData()
+                {
+                    ProjectName = projects[i].name
+                };
+                _projects.Add(project);
+            }
         }
     }
 }
