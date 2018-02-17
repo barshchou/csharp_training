@@ -8,7 +8,8 @@ namespace mantis_tests
 {
     public class ProjectData
     {
-        
+        public ProjectData() { }
+
         public ProjectData(string name)
         {
             ProjectName = name;
@@ -19,7 +20,7 @@ namespace mantis_tests
             ProjectName = name;
             Description = description;
         }
-        
+
         public string ProjectName { get; set; }
         public string Description { get; set; }
 

@@ -52,7 +52,6 @@ namespace mantis_tests
             menuHelper = new ManagementMenuHelper(this);
             adminHelper = new AdminHelper(this, baseURL);
             API = new APIHelper(this);
-
         }
 
         //Destructor of Application manager object, runs after ending test/s

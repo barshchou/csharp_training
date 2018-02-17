@@ -32,7 +32,7 @@ namespace mantis_tests
         }
 
         private List<ProjectData> projectCache = null;
-
+        
         public List<ProjectData> GetProjectList(AccountData adminAccount)
         {
             if (projectCache == null)
@@ -53,7 +53,8 @@ namespace mantis_tests
             }
             return new List<ProjectData>(projectCache);
         }
-
+        
+        
         public bool ProjectExists(AccountData adminAccount, ProjectData projectName)
         {
             int i = 0;
@@ -74,7 +75,7 @@ namespace mantis_tests
                 return false;
             }
         }
-
+        
         public void SubmitProjectCreation()
         {
             driver.FindElement(By.XPath("//input[@value='Add Project']")).Click();
