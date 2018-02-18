@@ -24,18 +24,75 @@ namespace mantis_tests
             client.mc_issue_add(account.Name, account.Password, issue);
         }
 
-        public void GetProjectsList(AccountData account)
+        public List<ProjectData> _projects = null;
+
+        public List<ProjectData> GetProjectsList(AccountData account)
+        {
+            Mantis.ProjectData[] projects = GetProjectsApi(account);
+
+            if (_projects == null)
+            {
+                _projects = new List<ProjectData>();
+                for (int i = 0; i < projects.Length; i++)
+                {
+                    ProjectData project = new ProjectData()
+                    {
+                        ProjectName = projects[i].name
+                    };
+                    _projects.Add(project);
+                }
+            }
+            return new List<ProjectData>(_projects);
+        }
+
+        public Mantis.ProjectData[] GetProjectsApi(AccountData account)
         {
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
             Mantis.ProjectData[] projects = client.mc_projects_get_user_accessible(account.Name, account.Password);
-            List<ProjectData> _projects = new List<ProjectData>();
-            for (int i = 0; i < projects.Length; i++)
+            return projects;
+        }
+
+        public bool ProjectExists(AccountData adminAccount, ProjectData projectName)
+        {
+            int i = 0;
+            GetProjectsList(adminAccount);
+            foreach (ProjectData project in _projects)
             {
-                ProjectData project = new ProjectData()
+                if (projectName.ProjectName == project.ProjectName)
                 {
-                    ProjectName = projects[i].name
-                };
-                _projects.Add(project);
+                    i++;
+                }
+            }
+            if (i == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void AddProjectApi(AccountData account, ProjectData project)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData projects = new Mantis.ProjectData();
+            projects.id = project.Id;
+            projects.name = project.ProjectName;
+            client.mc_project_add(account.Name, account.Password, projects);
+        }
+
+        public void RemoveProjectApi(AccountData account, ProjectData project)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData[] projects = GetProjectsApi(account);
+
+            foreach (Mantis.ProjectData _project in projects)
+            {
+                if(_project.name == project.ProjectName)
+                {
+                    client.mc_project_delete(account.Name, account.Password, _project.id);
+                }
             }
         }
     }
