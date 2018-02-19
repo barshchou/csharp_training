@@ -32,7 +32,16 @@ namespace mantis_tests
                 app.API.AddProjectApi(account, project);
             }
 
-            app.API.RemoveProjectApi(account,project);
+            List<ProjectData> oldProjects = app.API.GetProjectsList(account);
+            ProjectData toBeRemoved = oldProjects[0];
+
+            app.API.RemoveProjectApi(account);
+
+            List<ProjectData> newProjects = app.API.GetProjectsList(account);
+            oldProjects.Remove(toBeRemoved);
+            oldProjects.Sort();
+            newProjects.Sort();
+            Assert.AreEqual(oldProjects, newProjects);
         }
 
         [Test]
@@ -47,7 +56,7 @@ namespace mantis_tests
 
             ProjectData project = new ProjectData()
             {
-                ProjectName = "test_new"
+                ProjectName = "test3"
             };
 
             if (app.API.ProjectExists(account, project))
@@ -55,7 +64,17 @@ namespace mantis_tests
                 app.API.RemoveProjectApi(account, project);
             }
 
+            List<ProjectData> oldProjects = app.API.GetProjectsList(account);
+
             app.API.AddProjectApi(account, project);
+
+            //Assert.AreEqual(oldProjects.Count + 1, app.API.GetProjectsList(account));
+
+            List<ProjectData> newProjects = app.API.GetProjectsList(account);
+            oldProjects.Add(project);
+            oldProjects.Sort();
+            newProjects.Sort();
+            Assert.AreEqual(oldProjects, newProjects);
         }
     }
 }

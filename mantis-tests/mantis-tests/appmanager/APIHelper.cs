@@ -24,14 +24,14 @@ namespace mantis_tests
             client.mc_issue_add(account.Name, account.Password, issue);
         }
 
-        public List<ProjectData> _projects = null;
+        public static List<ProjectData> _projects = null;
 
         public List<ProjectData> GetProjectsList(AccountData account)
         {
             Mantis.ProjectData[] projects = GetProjectsApi(account);
 
-            if (_projects == null)
-            {
+            //if (_projects == null)
+            //{
                 _projects = new List<ProjectData>();
                 for (int i = 0; i < projects.Length; i++)
                 {
@@ -41,7 +41,7 @@ namespace mantis_tests
                     };
                     _projects.Add(project);
                 }
-            }
+            //}
             return new List<ProjectData>(_projects);
         }
 
@@ -94,6 +94,13 @@ namespace mantis_tests
                     client.mc_project_delete(account.Name, account.Password, _project.id);
                 }
             }
+        }
+
+        public void RemoveProjectApi(AccountData account)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData[] projects = GetProjectsApi(account);
+            client.mc_project_delete(account.Name, account.Password, projects[0].id);
         }
     }
 }
